@@ -13,7 +13,6 @@
                         <img src="../assets/logo.png" alt />
                       </v-img>
                       <v-card-text class="mt-4">
-                        <div v-if="error" class="alert alert-danger">{{error}}</div>
                         <h1
                           class="text-center display-2 white--text text--accent-3"
                         >Sign in to Vibbi</h1>
@@ -65,8 +64,19 @@
                         </div>
                       </v-card-text>
                       <div class="text-center mt-3">
-                        <v-btn rounded color="teal accent-3" dark @click="validate">Sign In</v-btn>
+                        <v-btn
+                          rounded
+                          color="teal accent-3"
+                          dark
+                          @click="submit"
+                        >Sign In</v-btn>
                       </div>
+                      <v-snackbar v-model="snackbar" :timeout="timeout">
+                        {{ error }}
+                        <template v-slot:action="{ attrs }">
+                          <v-btn color="teal accent-4" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+                        </template>
+                      </v-snackbar>
                     </v-col>
                     <v-col cols="12" md="4" class="teal accent-3">
                       <v-card-text class="white--text mt-12">
@@ -101,6 +111,8 @@ export default {
       },
       valid: true,
       error: null,
+      snackbar: false,
+      timeout: 5000,
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -119,16 +131,18 @@ export default {
   },
   methods: {
     submit() {
+      this.snackbar = true,
+      this.$refs.form.reset(),
       firebase
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
+        .then(() => {
           this.$router.replace({ name: "Home" });
         })
         .catch(err => {
           this.error = err.message;
         });
     }
-  },
+  }
 };
 </script>

@@ -64,7 +64,7 @@
                             prepend-icon="mdi-lock"
                             type="password"
                             color="teal accent-3"
-                            v-model="form.password2"
+                            v-model="form.password"
                             :rules="password2Rules"
                             required
                           />
@@ -74,7 +74,7 @@
                             prepend-icon="mdi-lock"
                             type="password"
                             color="teal accent-3"
-                            v-model="form.password2"
+                            v-model="form.password"
                             :rules="password2Rules"
                             required
                             disabled
@@ -116,8 +116,14 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
-                        <v-btn rounded color="teal accent-3" dark @click="validate">Sign Up</v-btn>
+                        <v-btn rounded color="teal accent-3" dark @click="submit">Sign Up</v-btn>
                       </div>
+                      <v-snackbar v-model="snackbar" :timeout="timeout">
+                        {{ error }}
+                        <template v-slot:action="{ attrs }">
+                          <v-btn color="teal accent-4" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+                        </template>
+                      </v-snackbar>
                     </v-col>
                   </v-row>
                 </v-window-item>
@@ -146,6 +152,7 @@ export default {
       agreement: false,
       error: null,
       valid: true,
+      snackbar: false,
       dialog: false,
       usernameRules: [
         v => !!v || "Name is required",
@@ -164,12 +171,14 @@ export default {
           "password must have a special character e.g @",
         v => /[0-9]/.test(v) || "password must contain a number",
         v => /[A-Z]/.test(v) || "password must contain a capital letter"
-      ],
-      checkboxRules: [v => !!v || "This field is required"]
+      ]
+      // checkboxRules: [v => !!v || "This field is required"]
     };
   },
   methods: {
     submit() {
+      this.snackbar = true,
+      this.$refs.form.reset(),
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
@@ -178,7 +187,9 @@ export default {
             .updateProfile({
               displayName: this.form.name
             })
-            .then(() => {});
+            .then(() => {
+              this.$router.replace({ name: "Login" });
+            });
         })
         .catch(err => {
           this.error = err.message;
@@ -186,7 +197,7 @@ export default {
     },
     validate() {
       this.$refs.form.validate();
-      this.$refs.form.reset()
+      this.$refs.form.reset();
     }
   }
 };

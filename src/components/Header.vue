@@ -1,40 +1,35 @@
 <template>
-  <v-app-bar app >
+  <v-app-bar app>
     <!--  this should be beside the template below-->
     <template v-if="user.loggedIn">
-      <v-app-bar-nav-icon  @click="$emit('toggle')" class="mr-3"></v-app-bar-nav-icon>
-      <v-list-item-title to="/">Vue Firebase Auth</v-list-item-title>
+      <v-app-bar-nav-icon @click="$emit('toggle')" class="mr-3"></v-app-bar-nav-icon>
+
+      <v-spacer></v-spacer>
+
+      <v-responsive>
+        <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
+      </v-responsive>
     </template>
-
-    <v-spacer></v-spacer>
-
-    <!-- <v-responsive>
-      <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
-    </v-responsive>-->
     <ul class="navbar-nav ml-auto">
       <template v-if="user.loggedIn">
+        <v-btn elevation="2" color="grey" router @click.prevent="signOut">Logout</v-btn>
         <div class="nav-item">{{user.data.displayName}}</div>
-        <li class="nav-item">
-          <a class="nav-link" @click.prevent="signOut">Sign out</a>
-        </li>
       </template>
       <template v-else>
         <v-list rounded dense class="d-flex">
           <v-list-item router :to="`/Login`">
             <v-list-item-content>
-              <v-list-item-title  class="nav-link">Login</v-list-item-title>
+              <v-list-item-title class="nav-link">Login</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item router :to="`/Register`">
             <v-list-item-content>
-              <v-list-item-title  class="nav-link">Register</v-list-item-title>
+              <v-list-item-title class="nav-link">Register</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </template>
     </ul>
-    <v-spacer></v-spacer>
-    <v-btn elevation="2" color="grey" router to="/Register">Register</v-btn>
   </v-app-bar>
 </template>
 <script>
@@ -56,7 +51,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "Dashboard"
+            name: "Login"
           });
         });
     }
