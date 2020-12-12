@@ -1,0 +1,8 @@
+[
+    {
+        "channelName": "Tech Reagan",
+        "email": "techreagan@gmail.com",
+        "password": "123456",
+        "image": {"file": {"url": "../src/assets/images/user.png"}}
+    }
+]
