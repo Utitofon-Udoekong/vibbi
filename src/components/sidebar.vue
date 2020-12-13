@@ -3,11 +3,13 @@
     <v-list-item class="d-flex justify-space-between py-2">
       <v-menu bottom min-width="200px" rounded offset-y>
         <template v-slot:activator="{ on }" >
-          <v-btn icon x-large class="mr-3" v-on="on">
-            <v-avatar color="brown" size="48">
-              <img src="../assets/images/user.png" alt />
-            </v-avatar>
-          </v-btn>
+            <v-btn icon x-large class="mr-3" v-on="on">
+              <v-badge overlap content="4">
+                  <v-avatar color="brown" size="48">
+                    <img src="../assets/images/user.png" alt />
+                  </v-avatar>
+              </v-badge>
+            </v-btn>
         </template>
         <v-card>
           <v-list-item-content class="justify-center">

@@ -20,7 +20,7 @@
                 </v-img>
                 <v-card-actions>
                   <!-- watch video button -->
-                  <v-btn @click="videoOverlay = !videoOverlay">Watch Video</v-btn>
+                  <v-btn @click="openVideo">Watch Video</v-btn>
                   <v-spacer></v-spacer>
                   <!-- video action buttons -->
                   <v-tooltip bottom>
@@ -50,16 +50,9 @@
                 </v-card-actions>
               </v-card>
               <v-card-title class="align-end d-flex" align-center>
-                <v-btn 
-                icon 
-                x-large 
-                v-on="on" 
-                class="mr-3"
-                router 
-                :to="`/dashboard`"
-                >
+                <v-btn icon x-large v-on="on" class="mr-3" router :to="`/dashboard`">
                   <v-avatar color="brown" size="48">
-                    <img src="../assets/images/user.png" alt="">
+                    <img src="../assets/images/user.png" alt />
                   </v-avatar>
                 </v-btn>
                 <v-card-title>
@@ -83,7 +76,7 @@
               <v-card v-if="!videoOverlaybtn" class="d-flex justify-space-between .flex-sm-column">
                 <v-card class="mx-auto my-12" width="700" relative>
                   <video controls autoplay loop width="100%" height="100%">
-                    <source src="../assets/video/login-bg.mp4" type="video/mp4" />
+                    <!-- <source src="../assets/video/login-bg.mp4" type="video/mp4" /> -->
                   </video>
                 </v-card>
                 <v-card :loading="loading" class="my-12 mx-auto" max-width="374">
@@ -132,10 +125,11 @@
 export default {
   name: "categoryMain",
   data: () => ({
-    overlay: false,
     videoOverlay: false,
     videoOverlaybtn: true,
     dialog: false,
+    loading: false,
+    selection: 1,
     categories: [
       { title: "Hip-Hop" },
       { title: "Drama" },
@@ -147,9 +141,17 @@ export default {
     ]
   }),
   methods: {
+    openVideo(){
+      this.videoOverlay = !this.videoOverlay
+    },
     closeVideo() {
       this.videoOverlay = false;
-    }
+    },
+    reserve() {
+      this.loading = true;
+
+      setTimeout(() => (this.loading = false), 2000);
+    },
   },
   watch: {
     videoOverlay(val) {

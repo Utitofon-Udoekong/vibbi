@@ -22,9 +22,6 @@
                           <v-btn class="mx-2" fab color="white" outlined>
                             <v-icon>mdi-linkedin</v-icon>
                           </v-btn>
-                          <v-btn class="mx-2" fab color="white" outlined>
-                            <v-icon>mdi-github</v-icon>
-                          </v-btn>
                           <h4 class="text-center mt-4 font-weight-medium">or send a direct message</h4>
                           <v-form ref="form" v-model="valid" lazy-validation>
                             <v-text-field
@@ -78,6 +75,7 @@
 </template>
 
 <script>
+
 export default {
   name: "contact",
   data: () => ({
@@ -101,6 +99,19 @@ export default {
   methods: {
     validate() {
       this.$refs.form.validate();
+    }
+  },
+  watch: {
+    sendEmail(name, email, message){
+      email.send({
+        Host: "smtp.gmail.com",
+        Username: "utitofonudoekong@gmail.com",
+        Password: "app password from gmail",
+        To: "utitofonudoekong@gmail.com",
+        From: "utitofonudoekong@gmail.com",
+        Subject: `${name} sent you a message`,
+        Body: `Name ${name} <br/> Email: ${email} <br/> Message: ${message}`
+      }).then(() => alert("message has been successfully sent"))
     }
   }
 };

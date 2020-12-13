@@ -5,17 +5,19 @@
         <v-card elevation="12" width="256" class="pa-4">
           <v-list shaped>
             <v-list-item-group v-model="window" mandatory tag="v-flex">
-              <v-list-item
+              <v-badge content="4" overlap>
+                <v-list-item
                 v-for="item in items"
                 :key="item.title"
                 v-slot="{ active, toggle }"
                 class="mb-3"
-              >
-                <v-list-item-icon>
-                  <v-icon>mdi-forum</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content :input-value="active" @click="toggle">{{ item.title }}</v-list-item-content>
-              </v-list-item>
+                >
+                  <v-list-item-icon>
+                    <v-icon>mdi-forum</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content :input-value="active" @click="toggle">{{ item.title }}</v-list-item-content>
+                </v-list-item>
+              </v-badge>
             </v-list-item-group>
           </v-list>
         </v-card>
@@ -98,19 +100,77 @@
             <v-card flat>
               <v-card-text>
                 <v-row class="mb-4" align="center">
-                  <v-avatar color="grey" class="mr-4"></v-avatar>
-                  <strong class="title">Title</strong>
-                  <v-spacer></v-spacer>
-                  <v-btn icon>
-                    <v-icon>mdi-account</v-icon>
-                  </v-btn>
+                  <v-col cols="12" md="12">
+                    <v-dialog v-model="dialog" width="500">
+                      <template v-slot:activator="{on, attrs}">
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                        <v-divider></v-divider>
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          @click="dialog = true"
+                          class="mb-2"
+                        >Change profile image</v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title class="headline teal accent-4 mb-5">Privacy Policy</v-card-title>
+
+                        <v-file-input
+                          :rules="rules"
+                          accept="image/png, image/jpeg, image/bmp"
+                          placeholder="Pick an avatar"
+                          prepend-icon="mdi-camera"
+                          label="Avatar"
+                          show-size
+                        ></v-file-input>
+
+                        <v-card-actions>
+                          <v-btn color="primary" text @click="dialog = false">Change Image</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-col>
                 </v-row>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </v-card-text>
             </v-card>
           </v-window-item>
@@ -136,6 +196,7 @@ export default {
   name: "Dashboard",
   data() {
     return {
+      dialog: false,
       width: 2,
       radius: 10,
       padding: 8,
@@ -149,17 +210,23 @@ export default {
       autoLineWidth: false,
       length: 3,
       window: 0,
+      rules: [
+        value =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!"
+      ],
       items: [
         {
           title: "Analytics",
           icon: "mdi-view-dashboard"
         },
         {
-          title: "User views",
+          title: "Dashboard",
           icon: "mdi-forum"
         },
         {
-          title: "Analytics",
+          title: "Settings",
           icon: "mdi-analytics"
         }
       ]
