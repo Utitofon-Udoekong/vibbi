@@ -71,12 +71,7 @@
                           @click="submit"
                         >Sign In</v-btn>
                       </div>
-                      <v-snackbar v-model="snackbar" :timeout="timeout">
-                        {{ error }}
-                        <template v-slot:action="{ attrs }">
-                          <v-btn color="teal accent-4" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-                        </template>
-                      </v-snackbar>
+                      <h3>{{ error }}</h3>
                     </v-col>
                     <v-col cols="12" md="4" class="teal accent-3">
                       <v-card-text class="white--text mt-12">
@@ -111,8 +106,6 @@ export default {
       },
       valid: true,
       error: null,
-      snackbar: false,
-      timeout: 5000,
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -131,8 +124,6 @@ export default {
   },
   methods: {
     submit() {
-      this.snackbar = true,
-      this.$refs.form.reset(),
       firebase
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)

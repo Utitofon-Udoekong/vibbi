@@ -135,18 +135,18 @@ export default {
   data: () => ({
     items: [
       { title: "Home", icon: "mdi-view-dashboard", route: "/" },
-      { title: "Trending", icon: "mdi-forum", route: "/Trending" },
-      { title: "Subscriptions", icon: "mdi-bookmark", route: "/signUp" }
+      { title: "Trending", icon: "mdi-fire", route: "/Trending" },
+      { title: "Subscriptions", icon: "mdi-bookmark", route: "/subscriptions" }
     ],
     items2: [
       { title: "Library", icon: "mdi-library", route: "/library" },
       { title: "History", icon: "mdi-history", route: "/history" },
-      { title: "Watch Later", icon: "mdi-watch-later", route: "/watch-later" },
+      { title: "Watch Later", icon: "mdi-clock-fast", route: "/watch-later" },
       { title: "Liked Videos", icon: "mdi-emoticon-happy", route: "/liked-videos"
       }
     ],
     items3: [
-      { title: "Settings", icon: "mdi-view-dashboard", route: "/settings" },
+      { title: "Settings", icon: "mdi-gamepad-circle-outline mdi-spin", route: "/settings" },
       { title: "Help", icon: "mdi-help", route: "/help" },
       { title: "Send Feedback", icon: "mdi-forum", route: "/feedback" }
     ],

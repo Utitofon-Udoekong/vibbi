@@ -4,6 +4,7 @@ import Home from "../views/Home.vue"
 import Register from "../views/Register.vue"
 import Login from "../views/Login.vue"
 import Trending from "../views/Trending.vue"
+import subscription from "../views/Subscriptions.vue"
 import Dashboard from "../views/dashboard.vue"
 import FAQ from "../views/FAQ.vue"
 import contact from "../views/contact.vue"
@@ -22,6 +23,11 @@ const routes = [
     path: '/trending',
     name: 'Trending',
     component: Trending
+  },
+  {
+    path: '/subscriptions',
+    name: 'Subscription',
+    component: subscription
   },
   {
     path: '/Register',

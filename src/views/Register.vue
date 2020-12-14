@@ -118,12 +118,7 @@
                       <div class="text-center mt-n5">
                         <v-btn rounded color="teal accent-3" dark @click="submit">Sign Up</v-btn>
                       </div>
-                      <v-snackbar v-model="snackbar" :timeout="timeout">
-                        {{ error }}
-                        <template v-slot:action="{ attrs }">
-                          <v-btn color="teal accent-4" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-                        </template>
-                      </v-snackbar>
+                      <h3>{{ error }}</h3>
                     </v-col>
                   </v-row>
                 </v-window-item>
@@ -152,7 +147,6 @@ export default {
       agreement: false,
       error: null,
       valid: true,
-      snackbar: false,
       dialog: false,
       usernameRules: [
         v => !!v || "Name is required",
@@ -177,8 +171,6 @@ export default {
   },
   methods: {
     submit() {
-      this.snackbar = true,
-      this.$refs.form.reset(),
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)

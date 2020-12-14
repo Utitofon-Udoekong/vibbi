@@ -99,20 +99,25 @@ export default {
   methods: {
     validate() {
       this.$refs.form.validate();
-    }
-  },
-  watch: {
-    sendEmail(name, email, message){
-      email.send({
-        Host: "smtp.gmail.com",
-        Username: "utitofonudoekong@gmail.com",
-        Password: "app password from gmail",
-        To: "utitofonudoekong@gmail.com",
-        From: "utitofonudoekong@gmail.com",
-        Subject: `${name} sent you a message`,
-        Body: `Name ${name} <br/> Email: ${email} <br/> Message: ${message}`
-      }).then(() => alert("message has been successfully sent"))
-    }
+    },
+    sendEmail(){
+        this.$loadScript("https://smtpjs.com/v3/smtp.js")
+        .then(Email => {                                         //this Promise return nothing!!!
+            Email.send({
+                SecureToken : "3df7ff95-181c-4f27-9e94-ee2cfc280818",
+                To : 'mail@example.com',
+                From : this.email,
+                Subject : this.name,
+                Body : this.message,
+            }).then(
+                message => alert(message)
+            );
+        })
+        .catch(() => {
+        // Failed to fetch script
+        });
+
+        },
   }
 };
 </script>
