@@ -142,13 +142,13 @@ export default {
       { title: "Library", icon: "mdi-library", route: "/library" },
       { title: "History", icon: "mdi-history", route: "/history" },
       { title: "Watch Later", icon: "mdi-clock-fast", route: "/watch-later" },
-      { title: "Liked Videos", icon: "mdi-emoticon-happy", route: "/liked-videos"
-      }
+      
     ],
     items3: [
       { title: "Settings", icon: "mdi-gamepad-circle-outline mdi-spin", route: "/settings" },
       { title: "Help", icon: "mdi-help", route: "/help" },
-      { title: "Send Feedback", icon: "mdi-forum", route: "/feedback" }
+      { title: "Liked Videos", icon: "mdi-emoticon-happy", route: "/liked-videos"
+      }
     ],
     items4: [
       { title: "About", icon: "mdi-forum", route: "/about" },
