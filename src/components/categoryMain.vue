@@ -7,7 +7,7 @@
             <h1 class="pa-2 white--text">{{ category.title }}</h1>
           </v-col>
 
-          <v-col cols="12" sm="6" md="4" v-for="j in 9" :key="`${category}${j}`">
+          <v-col cols="12" sm="6" md="4" v-for="j in 9" :key="`${category.title}${j}`">
             <v-card class="fill-height" fluid>
               <v-card width="fill-width">
                 <v-img
@@ -50,7 +50,7 @@
                 </v-card-actions>
               </v-card>
               <v-card-title class="align-end d-flex" align-center>
-                <v-btn icon x-large v-on="on" class="mr-3" router :to="`/dashboard`">
+                <v-btn icon x-large class="mr-3" router :to="`/dashboard`">
                   <v-avatar color="brown" size="48">
                     <img src="../assets/images/user.png" alt />
                   </v-avatar>
@@ -76,14 +76,13 @@
               <v-card v-if="!videoOverlaybtn" class="d-flex justify-space-between .flex-sm-column">
                 <v-card class="mx-auto my-12" width="700" relative>
                   <video controls autoplay loop width="100%" height="100%">
-                    <!-- <source src="../assets/video/login-bg.mp4" type="video/mp4" /> -->
+                    <source src="../assets/video/login-bg.mp4" type="video/mp4" />
                   </video>
                 </v-card>
                 <v-card :loading="loading" class="my-12 mx-auto" max-width="374">
                   <template slot="progress">
                     <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
                   </template>
-                  <v-card-title>{{ category.title }}</v-card-title>
                   <v-card-text>
                     <v-row align="center" class="mx-0">
                       <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
@@ -154,12 +153,12 @@ export default {
     },
   },
   watch: {
-    videoOverlay(val) {
-      val &&
+    videoOverlay(newVal, oldVVal) {
+      if(newVal !== oldVVal){
         setTimeout(() => {
           this.videoOverlaybtn = false;
           this.dialog = true;
-        }, 3000);
+        }, 1000);}
     }
   }
 };
