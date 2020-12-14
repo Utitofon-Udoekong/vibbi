@@ -96,7 +96,7 @@
                   <v-card-text>
                     <v-chip-group
                       v-model="selection"
-                      active-class="deep-purple accent-4 white--text"
+                      active-class="teal accent-4 white--text"
                       column
                     >
                       <v-chip>Dance</v-chip>

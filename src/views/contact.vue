@@ -57,7 +57,7 @@
                               :disabled="!valid"
                               color="teal accent-3"
                               class="mr-4"
-                              @click="validate"
+                              @click="sendEmail"
                             >Submit</v-btn>
                           </v-form>
                         </div>
@@ -104,8 +104,8 @@ export default {
         this.$loadScript("https://smtpjs.com/v3/smtp.js")
         .then(() => {                                         //this Promise return nothing!!!
             window.Email && window.Email.send({
-                SecureToken : "3df7ff95-181c-4f27-9e94-ee2cfc280818",
-                To : 'mail@example.com',
+                SecureToken : "tcnl-sqvv-mkhk-mipa",
+                To : 'utitofonudoekong@gmail.com',
                 From : this.email,
                 Subject : this.name,
                 Body : this.message,
