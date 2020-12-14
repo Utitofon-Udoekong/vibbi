@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import firebase from "firebase";
 import store from "./store/index";
+import LoadScript from 'vue-plugin-load-script';
 
 
 const firebaseConfig = {
@@ -20,6 +21,9 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
 });
+
+
+Vue.use(LoadScript);
 
 
 Vue.config.productionTip = false

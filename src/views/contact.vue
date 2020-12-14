@@ -102,8 +102,8 @@ export default {
     },
     sendEmail(){
         this.$loadScript("https://smtpjs.com/v3/smtp.js")
-        .then(Email => {                                         //this Promise return nothing!!!
-            Email.send({
+        .then(() => {                                         //this Promise return nothing!!!
+            window.Email && window.Email.send({
                 SecureToken : "3df7ff95-181c-4f27-9e94-ee2cfc280818",
                 To : 'mail@example.com',
                 From : this.email,
